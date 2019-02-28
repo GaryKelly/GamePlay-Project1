@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            #ifndef CUBE_H
+#ifndef CUBE_H
 #define CUBE_H
 
 #include <gl/glew.h>
@@ -110,7 +110,7 @@ static const GLfloat colors[] = {
 	1.0f, 0.0f, 1.0f, 1.0f, // [2]	// (23)
 };
 
-GLfloat uvs[2 * 4 * 6] = {
+static GLfloat uvs[2 * 4 * 6] = {
 	// Front Face (other faces populated in initialisation)
 	0.0, 0.0,
 	1.0, 0.0,
