@@ -21,7 +21,8 @@
 #include <stb_image.h>
 
 #include <GameObject.h>
-
+#include "MyMatrix3.h"
+#include "MyVector3.h"
 using namespace std;
 using namespace sf;
 using namespace glm;
@@ -46,6 +47,9 @@ private:
 	void update();
 	void render();
 	void unload();
+	MyMatrix3 m_tbn;
+	MyVector3 m_cameraTranslate; 
+	float cameraChangeVal{ 0.0f };
 };
 
 #endif  // ! GAME_H

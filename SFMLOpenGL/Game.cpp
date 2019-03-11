@@ -398,10 +398,24 @@ void Game::update()
 	// For mutiple objects (cubes) create multiple models
 	// To alter Camera modify view & projection
 	mvp = projection * view * model;
-
+	
+	//m_cameraTranslate = MyVector3(view[0].x, view[0].y, view[0].z);
+	//m_cameraTranslate += MyVector3(-0.1, 0, 0);
+	//view[0].x = m_cameraTranslate.getX();
+	//view[0].y = m_cameraTranslate.getY();
+	//view[0].z = m_cameraTranslate.getZ();
+	//view[0].x += 0.01;
+	view = lookAt(
+		vec3(cameraChangeVal, 4.0f, 10.0f),	// Camera (x,y,z), in World Space
+		vec3(0.0f, 0.0f, 0.0f),		// Camera looking at origin
+		vec3(0.0f, 1.0f, 0.0f)		// 0.0f, 1.0f, 0.0f Look Down and 0.0f, -1.0f, 0.0f Look Up
+	);
+	cameraChangeVal+= 0.001;
 	DEBUG_MSG(model[0].x);
 	DEBUG_MSG(model[0].y);
 	DEBUG_MSG(model[0].z);
+	//game_object[0]->setPosition(vec3(game_object[0]->getPosition().x + 0.001, game_object[0]->getPosition().y, game_object[0]->getPosition().z));
+	
 }
 
 void Game::render()
@@ -474,7 +488,7 @@ void Game::render()
 
 	// VBO Data....vertices, colors and UV's appended
 	// Add the Vertices for all your GameOjects, Colors and UVS
-	
+
 	glBufferSubData(GL_ARRAY_BUFFER, 0 * VERTICES * sizeof(GLfloat), 3 * VERTICES * sizeof(GLfloat), game_object[0]->getVertex());
 	//glBufferSubData(GL_ARRAY_BUFFER, 0 * VERTICES * sizeof(GLfloat), 3 * VERTICES * sizeof(GLfloat), vertices);
 	glBufferSubData(GL_ARRAY_BUFFER, 3 * VERTICES * sizeof(GLfloat), 4 * COLORS * sizeof(GLfloat), colors);
