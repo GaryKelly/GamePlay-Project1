@@ -62,7 +62,7 @@ Game::Game(sf::ContextSettings settings) :
 	game_object[0]->setPosition(vec3(0.5f, 0.5f, -10.0f));
 
 	game_object[1] = new GameObject();
-	game_object[1]->setPosition(vec3(0.8f, 0.8f, -6.0f));
+	game_object[1]->setPosition(vec3(2.8f, 0.8f, -6.0f));
 }
 
 Game::~Game()
@@ -405,12 +405,14 @@ void Game::update()
 	//view[0].y = m_cameraTranslate.getY();
 	//view[0].z = m_cameraTranslate.getZ();
 	//view[0].x += 0.01;
-	view = lookAt(
-		vec3(cameraChangeVal, 4.0f, 10.0f),	// Camera (x,y,z), in World Space
-		vec3(0.0f, 0.0f, 0.0f),		// Camera looking at origin
+	view = lookAt( // trying to move camera in the world
+		vec3(0.0f+cameraChangeVal, 4.0f, 10.0f),	// Camera (x,y,z), in World Space
+		vec3(0.0f+cameraChangeVal, 0.0f, 0.0f),		// Camera looking at origin
 		vec3(0.0f, 1.0f, 0.0f)		// 0.0f, 1.0f, 0.0f Look Down and 0.0f, -1.0f, 0.0f Look Up
 	);
-	cameraChangeVal+= 0.001;
+	game_object[0]->setPosition(game_object[0]->getPosition() + vec3(0.001f, 0.0f, 0.0f)); // trying to move cube at same rate as camera moving
+	//game_object[1]->setPosition(vec3(1.8f, 0.8f, -6.0f));
+	cameraChangeVal += 0.001;
 	DEBUG_MSG(model[0].x);
 	DEBUG_MSG(model[0].y);
 	DEBUG_MSG(model[0].z);
@@ -490,6 +492,7 @@ void Game::render()
 	// Add the Vertices for all your GameOjects, Colors and UVS
 
 	glBufferSubData(GL_ARRAY_BUFFER, 0 * VERTICES * sizeof(GLfloat), 3 * VERTICES * sizeof(GLfloat), game_object[0]->getVertex());
+	glBufferSubData(GL_ARRAY_BUFFER, 0 * VERTICES * sizeof(GLfloat), 3 * VERTICES * sizeof(GLfloat), game_object[1]->getVertex());
 	//glBufferSubData(GL_ARRAY_BUFFER, 0 * VERTICES * sizeof(GLfloat), 3 * VERTICES * sizeof(GLfloat), vertices);
 	glBufferSubData(GL_ARRAY_BUFFER, 3 * VERTICES * sizeof(GLfloat), 4 * COLORS * sizeof(GLfloat), colors);
 	glBufferSubData(GL_ARRAY_BUFFER, ((3 * VERTICES) + (4 * COLORS)) * sizeof(GLfloat), 2 * UVS * sizeof(GLfloat), uvs);
