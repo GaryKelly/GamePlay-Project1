@@ -35,7 +35,7 @@ public:
 	~Game();
 	void run();
 private:
-	GameObject* game_object[2];
+	GameObject* game_object[5];
 	RenderWindow window;
 	Clock clock;
 	Time time;
@@ -50,6 +50,8 @@ private:
 	MyMatrix3 m_tbn;
 	MyVector3 m_cameraTranslate; 
 	float cameraChangeVal{ 0.0f };
+	const int MAX_CUBES{ 5 };
+
 };
 
 #endif  // ! GAME_H
